@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1504753803 source:c:\users\d.richardcarl\documents\csc 151\studentrecord\srdriver.cpp
+	<iostream>
+	<string>
+	<algorithm>
+	"Student.hpp"
+	"StudentRecord.hpp"
+	"clrscr.hpp"
+	"sleep.hpp"
+
+1504753065 c:\users\d.richardcarl\documents\csc 151\studentrecord\student.hpp
+	<iostream>
+
+1504753054 source:c:\users\d.richardcarl\documents\csc 151\studentrecord\student.cpp
+	"Student.hpp"
+
+1504754050 source:c:\users\d.richardcarl\documents\csc 151\studentrecord\studentrecord.cpp
+	"StudentRecord.hpp"
+
+1504753822 c:\users\d.richardcarl\documents\csc 151\studentrecord\studentrecord.hpp
+	<iostream>
+	<fstream>
+	<vector>
+	"Student.hpp"
+
+1504506075 source:c:\users\d.richardcarl\documents\csc 151\studentrecord\sleep.cpp
+	"sleep.hpp"
+
+1504505979 c:\users\d.richardcarl\documents\csc 151\studentrecord\sleep.hpp
+	<windows.h>
+	<unistd.h>
+
+1504535148 c:\users\d.richardcarl\documents\csc 151\studentrecord\clrscr.hpp
+
