@@ -25,10 +25,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        sr.cpp
+        sr.cpp \
 
 HEADERS += \
-        sr.h
+        sr.h \
 
 FORMS += \
         sr.ui

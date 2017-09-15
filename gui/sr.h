@@ -17,6 +17,8 @@ public:
 
 private:
     Ui::SR *ui;
+
+    initTable();
 };
 
 #endif // SR_H
