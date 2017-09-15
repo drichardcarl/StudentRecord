@@ -6,7 +6,6 @@ SR::SR(QWidget *parent) :
     ui(new Ui::SR)
 {
     ui->setupUi(this);
-    initTable();
 }
 
 SR::~SR()
@@ -14,13 +13,16 @@ SR::~SR()
     delete ui;
 }
 
-SR::initTable()
-{
-    ui->SRDisplay->setColumnWidth(1,200);
+int SR::init(const QString& db){
+    DbManager dbmngr;
+    if (dbmngr.open(db))
+        return -1;
 
-    ui->SRDisplay->setRowCount(1);
-    QTableWidgetItem* item = new QTableWidgetItem;
-    item->setTextAlignment(Qt::AlignCenter);
-    item->setText("DUMDUM");
-    ui->SRDisplay->setItem(0,0,item);
+    dbmngr.addPerson("DUMDUM",
+                     "CARL RICHARD",
+                     "MALAYAG",
+                     "2014-0367",
+                     "BSEC");
+    return 0;
 }
+

@@ -2,6 +2,7 @@
 #define SR_H
 
 #include <QWidget>
+#include "dbmanager.hpp"
 
 namespace Ui {
 class SR;
@@ -13,12 +14,11 @@ class SR : public QWidget
 
 public:
     explicit SR(QWidget *parent = 0);
+    int init(const QString& db);
     ~SR();
 
 private:
     Ui::SR *ui;
-
-    initTable();
 };
 
 #endif // SR_H
