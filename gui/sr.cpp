@@ -3,7 +3,8 @@
 
 SR::SR(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::SR)
+    ui(new Ui::SR),
+    dbmngr(nullptr)
 {
     ui->setupUi(this);
 }
@@ -14,15 +15,33 @@ SR::~SR()
 }
 
 int SR::init(const QString& db){
-    DbManager dbmngr;
-    if (dbmngr.open(db))
+    dbmngr = new DbManager;
+    if (dbmngr->open(db))
         return -1;
 
-    dbmngr.addPerson("DUMDUM",
-                     "CARL RICHARD",
-                     "MALAYAG",
-                     "2014-0367",
-                     "BSEC");
+    _load();
     return 0;
 }
 
+// * load the data from the database to the table
+// * selects all rows from table 'students'
+//   and then display the data using the table widget
+void SR::_load(){
+    ui->SRDisplay->setColumnWidth(0,120);
+    ui->SRDisplay->setColumnWidth(1,160);
+    ui->SRDisplay->setColumnWidth(2,120);
+    // database is already opened
+    QSqlQuery query;
+    query.exec("SELECT * FROM students");
+    int i = 0;
+    while(query.next()){
+        ui->SRDisplay->setRowCount(i+1);
+        for (int j=1; j<6; ++j){
+            QTableWidgetItem* item = new QTableWidgetItem;
+            item->setTextAlignment(Qt::AlignCenter);
+            item->setText(query.value(j).toString());
+            ui->SRDisplay->setItem(i, j-1, item);
+        }
+        ++i;
+    }
+}

@@ -19,6 +19,9 @@ public:
 
 private:
     Ui::SR *ui;
+    DbManager* dbmngr;
+
+    void _load();
 };
 
 #endif // SR_H
