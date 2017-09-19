@@ -45,3 +45,10 @@ void SR::_load(){
         ++i;
     }
 }
+
+void SR::on_AddBtn_clicked()
+{
+    UIAddStudent win(dbmngr);
+    win.exec();
+    _load();
+}

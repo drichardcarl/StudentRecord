@@ -2,6 +2,7 @@
 #define SR_H
 
 #include <QWidget>
+#include "uiaddstudent.h"
 #include "dbmanager.hpp"
 
 namespace Ui {
@@ -16,6 +17,9 @@ public:
     explicit SR(QWidget *parent = 0);
     int init(const QString& db);
     ~SR();
+
+private slots:
+    void on_AddBtn_clicked();
 
 private:
     Ui::SR *ui;

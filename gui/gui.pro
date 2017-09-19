@@ -27,12 +27,15 @@ SOURCES += \
         main.cpp \
         sr.cpp \
     dbmanager.cpp \
-    alert.cpp
+    alert.cpp \
+    uiaddstudent.cpp
 
 HEADERS += \
         sr.h \
     dbmanager.hpp \
-    alert.hpp
+    alert.hpp \
+    uiaddstudent.h
 
 FORMS += \
-        sr.ui
+        sr.ui \
+    uiaddstudent.ui
