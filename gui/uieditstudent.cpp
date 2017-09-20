@@ -17,7 +17,7 @@ UIEditStudent::~UIEditStudent()
 
 void UIEditStudent::on_ESUCancelBtn_clicked()
 {
-    this->close();
+    this->reject();
 }
 
 void UIEditStudent::on_ESUSaveBtn_clicked()
@@ -50,7 +50,7 @@ void UIEditStudent::on_ESUSaveBtn_clicked()
 
     this->dbmngr->updateStudent(lname, fname, mname, idNo, course);
     alert(0, "Status", "Student's record was successfully updated.");
-    this->close();
+    this->accept();
 }
 
 void UIEditStudent::init(QList<QTableWidgetItem*> data)

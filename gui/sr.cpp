@@ -50,10 +50,14 @@ void SR::_load(){
 void SR::on_AddBtn_clicked()
 {
     UIAddStudent win(dbmngr);
-    win.exec();
-    _load();
-    ui->SRDisplay->scrollToBottom(); // select last row
-    ui->SRDisplay->setFocus();
+    if (win.exec()){ // cancel button was not pressed
+        _load();
+        ui->SRDisplay->selectRow(ui->SRDisplay->rowCount()-1); // select last row
+        ui->SRDisplay->setFocus();
+        return;
+    }
+    // if cancel, clear selection
+    ui->SRDisplay->clearSelection();
 }
 
 void SR::on_EditBtn_clicked()
@@ -67,8 +71,36 @@ void SR::on_EditBtn_clicked()
     int r = ui->SRDisplay->selectedItems().at(0)->row();
     UIEditStudent win(dbmngr);
     win.init(ui->SRDisplay->selectedItems());
-    win.exec();
-    _load();
-    ui->SRDisplay->selectRow(r);
-    ui->SRDisplay->setFocus();
+    if (win.exec()){ // cancel button was not pressed
+        _load();
+        ui->SRDisplay->selectRow(r); // select last selected row
+        ui->SRDisplay->setFocus();
+        return;
+    }
+    // if cancel, clear selection
+    ui->SRDisplay->clearSelection();
+}
+
+void SR::on_DeleteBtn_clicked()
+{
+    if (ui->SRDisplay->selectedItems().isEmpty()){
+        alert(1,
+              "Empty selection",
+              "Please select a record to edit.");
+        return;
+    }
+
+    if (alert(3,
+          "Confirm Action",
+          "Are you sure you want to delete selected record ?")
+            == QMessageBox::Yes){
+        // delete student with the ID No.
+        dbmngr->deleteStudent(ui->SRDisplay->selectedItems().at(3)->text());
+        alert(0,
+              "Result",
+              "Delete successful.");
+        _load();
+    }
+    // clear selection
+    ui->SRDisplay->clearSelection();
 }

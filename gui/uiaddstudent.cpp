@@ -17,7 +17,7 @@ UIAddStudent::~UIAddStudent()
 
 void UIAddStudent::on_ASUCancelBtn_clicked()
 {
-    this->close();
+    this->reject();
 }
 
 void UIAddStudent::on_ASUAddBtn_clicked()
@@ -62,5 +62,5 @@ void UIAddStudent::on_ASUAddBtn_clicked()
 
     this->dbmngr->addStudent(lname, fname, mname, idNo, course);
     alert(0, "Status", "Student Added.");
-    this->close();
+    this->accept();
 }

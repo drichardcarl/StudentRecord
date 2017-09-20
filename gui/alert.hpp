@@ -4,7 +4,7 @@
 #include <QString>
 #include <QMessageBox>
 
-void alert(int type, QString title, QString msg);
+int alert(int type, QString title, QString msg);
 
 #endif // ALERT_HPP
 

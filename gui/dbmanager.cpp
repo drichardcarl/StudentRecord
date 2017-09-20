@@ -81,6 +81,27 @@ bool DbManager::updateStudent(const QString& lname,
    return success;
 }
 
+bool DbManager::deleteStudent(const QString& idNo)
+{
+   bool success = false;
+   QSqlQuery query;
+   query.prepare("DELETE FROM students "
+                 "WHERE idNo=?");
+   query.addBindValue(idNo);
+
+   if(query.exec())
+   {
+       success = true;
+   }
+   else
+   {
+        qDebug() << "updatePerson error:  "
+                 << query.lastError();
+   }
+
+   return success;
+}
+
 bool DbManager::idNoIsTaken(const QString& idNo){
     int count = 0;
     QSqlQuery q;

@@ -1,17 +1,20 @@
 #include "alert.hpp"
 
-void alert(int type, QString title, QString msg){
+int alert(int type, QString title, QString msg){
     switch (type) {
     // information
     case 0:
-        QMessageBox::information(0, title, msg);
+        return QMessageBox::information(0, title, msg);
         break;
     // warning
     case 1:
-        QMessageBox::warning(0, title, msg);
+        return QMessageBox::warning(0, title, msg);
         break;
     case 2:
-        QMessageBox::critical(0, title, msg);
+        return QMessageBox::critical(0, title, msg);
+        break;
+    case 3:
+        return QMessageBox::critical(0, title, msg, QMessageBox::Yes, QMessageBox::No);
         break;
     }
 }

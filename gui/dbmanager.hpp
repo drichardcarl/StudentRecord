@@ -26,6 +26,8 @@ public:
                    const QString& mname,
                    const QString& idNo,
                    const QString& course);
+    bool deleteStudent(const QString& idNo);
+
     bool idNoIsTaken(const QString& idNo);
 
 private:

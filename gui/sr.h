@@ -25,6 +25,8 @@ private slots:
 
     void on_EditBtn_clicked();
 
+    void on_DeleteBtn_clicked();
+
 private:
     Ui::SR *ui;
     DbManager* dbmngr;
