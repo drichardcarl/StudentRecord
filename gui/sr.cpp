@@ -8,6 +8,7 @@ SR::SR(QWidget *parent) :
     model(nullptr)
 {
     ui->setupUi(this);
+    startTimer(500);
 }
 
 SR::~SR()
@@ -103,4 +104,35 @@ void SR::on_DeleteBtn_clicked()
     }
     // clear selection
     ui->SRDisplay->clearSelection();
+}
+
+void SR::on_SearchBar_returnPressed()
+{
+    QString idNo = ui->SearchBar->text();
+    QSqlQuery q;
+    q.prepare("SELECT * "
+              "FROM students "
+              "WHERE idNo=?");
+    q.addBindValue(idNo);
+    q.exec();
+
+    int i = 0;
+    ui->SRDisplay->setRowCount(i);
+    while(q.next()){
+        ui->SRDisplay->setRowCount(i+1);
+        for (int j=1; j<6; ++j){
+            QTableWidgetItem* item = new QTableWidgetItem;
+            item->setTextAlignment(Qt::AlignCenter);
+            item->setText(q.value(j).toString());
+            ui->SRDisplay->setItem(i, j-1, item);
+        }
+        ++i;
+    }
+}
+
+
+void SR::on_SearchBar_textChanged(const QString &arg1)
+{
+    if (ui->SearchBar->text().size() == 1)
+        _load();
 }

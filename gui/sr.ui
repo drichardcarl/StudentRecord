@@ -132,7 +132,7 @@
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
       <property name="textElideMode">
-       <enum>Qt::ElideLeft</enum>
+       <enum>Qt::ElideNone</enum>
       </property>
       <property name="verticalScrollMode">
        <enum>QAbstractItemView::ScrollPerPixel</enum>
@@ -144,7 +144,7 @@
        <enum>Qt::DashDotLine</enum>
       </property>
       <property name="sortingEnabled">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
       <property name="rowCount">
        <number>0</number>

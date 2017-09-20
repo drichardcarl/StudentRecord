@@ -27,6 +27,10 @@ private slots:
 
     void on_DeleteBtn_clicked();
 
+    void on_SearchBar_returnPressed();
+
+    void on_SearchBar_textChanged(const QString &arg1);
+
 private:
     Ui::SR *ui;
     DbManager* dbmngr;
