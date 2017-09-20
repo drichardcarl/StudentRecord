@@ -21,7 +21,7 @@ int DbManager::open(const QString& path){
     }
 }
 
-bool DbManager::addPerson(const QString& lname,
+bool DbManager::addStudent(const QString& lname,
                           const QString& fname,
                           const QString& mname,
                           const QString& idNo,
@@ -50,4 +50,17 @@ bool DbManager::addPerson(const QString& lname,
    }
 
    return success;
+}
+
+bool DbManager::idNoIsTaken(const QString& idNo){
+    int count = 0;
+    QSqlQuery q;
+    q.prepare("SELECT * FROM students WHERE idNo = ?");
+    q.addBindValue(idNo);
+    q.exec();
+
+    while(q.next())
+        ++count;
+
+    return ((count) ? true : false);
 }

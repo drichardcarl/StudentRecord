@@ -41,10 +41,10 @@ void UIAddStudent::on_ASUAddBtn_clicked()
               "<FIRST NAME> cannot be empty!");
         return;
     }
-    if (idNo.isEmpty()){
+    if (idNo.isEmpty() || idNo.count() < 9){
         alert(1,
               "Invalid Input",
-              "<ID NO.> cannot be empty!");
+              "<ID NO.> cannot be empty or incomplete!");
         return;
     }
     if (course.isEmpty()){
@@ -53,8 +53,14 @@ void UIAddStudent::on_ASUAddBtn_clicked()
               "<COURSE> cannot be empty!");
         return;
     }
+    if (this->dbmngr->idNoIsTaken(idNo)){
+        alert(1,
+              "Invalid Input",
+              "ID No. must be unique!\n You may edit the existing record.");
+        return;
+    }
 
-    this->dbmngr->addPerson(lname, fname, mname, idNo, course);
+    this->dbmngr->addStudent(lname, fname, mname, idNo, course);
     alert(0, "Status", "Student Added.");
     this->close();
 }

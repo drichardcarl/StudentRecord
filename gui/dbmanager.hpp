@@ -16,11 +16,13 @@ class DbManager
 {
 public:
     int open(const QString& path);
-    bool addPerson(const QString& lname,
+    bool addStudent(const QString& lname,
                    const QString& fname,
                    const QString& mname,
                    const QString& idNo,
                    const QString& course);
+    bool idNoIsTaken(const QString& idNo);
+
 private:
     QSqlDatabase m_db;
 };
