@@ -1,26 +1,26 @@
-#include "uiaddstudent.h"
-#include "ui_uiaddstudent.h"
+#include "uieditstudent.h"
+#include "ui_uieditstudent.h"
 
-UIAddStudent::UIAddStudent(DbManager* dbmngr,QDialog *parent) :
+UIEditStudent::UIEditStudent(DbManager* dbmngr,QDialog *parent) :
     QDialog(parent),
     dbmngr(dbmngr),
-    ui(new Ui::UIAddStudent)
+    ui(new Ui::UIEditStudent)
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::SubWindow);
 }
 
-UIAddStudent::~UIAddStudent()
+UIEditStudent::~UIEditStudent()
 {
     delete ui;
 }
 
-void UIAddStudent::on_ASUCancelBtn_clicked()
+void UIEditStudent::on_ESUCancelBtn_clicked()
 {
     this->close();
 }
 
-void UIAddStudent::on_ASUAddBtn_clicked()
+void UIEditStudent::on_ESUSaveBtn_clicked()
 {
     QString lname = ui->txtLName->text().toUpper(),
             fname = ui->txtFName->text().toUpper(),
@@ -41,26 +41,23 @@ void UIAddStudent::on_ASUAddBtn_clicked()
               "<FIRST NAME> cannot be empty!");
         return;
     }
-    if (idNo.isEmpty() || idNo.count() < 9){
-        alert(1,
-              "Invalid Input",
-              "<ID NO.> cannot be empty or incomplete!");
-        return;
-    }
     if (course.isEmpty()){
         alert(1,
               "Invalid Input",
               "<COURSE> cannot be empty!");
         return;
     }
-    if (this->dbmngr->idNoIsTaken(idNo)){
-        alert(1,
-              "Invalid Input",
-              "ID No. must be unique!\nYou may edit the existing record.");
-        return;
-    }
 
-    this->dbmngr->addStudent(lname, fname, mname, idNo, course);
-    alert(0, "Status", "Student Added.");
+    this->dbmngr->updateStudent(lname, fname, mname, idNo, course);
+    alert(0, "Status", "Student's record was successfully updated.");
     this->close();
+}
+
+void UIEditStudent::init(QList<QTableWidgetItem*> data)
+{
+    ui->txtLName->setText(data.at(0)->text());
+    ui->txtFName->setText(data.at(1)->text());
+    ui->txtMName->setText(data.at(2)->text());
+    ui->txtIDNo->setText(data.at(3)->text());
+    ui->txtCourse->setText(data.at(4)->text());
 }

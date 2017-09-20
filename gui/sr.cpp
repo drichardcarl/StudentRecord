@@ -4,7 +4,8 @@
 SR::SR(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SR),
-    dbmngr(nullptr)
+    dbmngr(nullptr),
+    model(nullptr)
 {
     ui->setupUi(this);
 }
@@ -51,4 +52,23 @@ void SR::on_AddBtn_clicked()
     UIAddStudent win(dbmngr);
     win.exec();
     _load();
+    ui->SRDisplay->scrollToBottom(); // select last row
+    ui->SRDisplay->setFocus();
+}
+
+void SR::on_EditBtn_clicked()
+{
+    if (ui->SRDisplay->selectedItems().isEmpty()){
+        alert(1,
+              "Empty selection",
+              "Please select a record to edit.");
+        return;
+    }
+    int r = ui->SRDisplay->selectedItems().at(0)->row();
+    UIEditStudent win(dbmngr);
+    win.init(ui->SRDisplay->selectedItems());
+    win.exec();
+    _load();
+    ui->SRDisplay->selectRow(r);
+    ui->SRDisplay->setFocus();
 }

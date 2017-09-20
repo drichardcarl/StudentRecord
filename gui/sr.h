@@ -2,6 +2,8 @@
 #define SR_H
 
 #include <QWidget>
+#include <QSqlTableModel>
+#include "uieditstudent.h"
 #include "uiaddstudent.h"
 #include "dbmanager.hpp"
 
@@ -21,9 +23,12 @@ public:
 private slots:
     void on_AddBtn_clicked();
 
+    void on_EditBtn_clicked();
+
 private:
     Ui::SR *ui;
     DbManager* dbmngr;
+    QSqlTableModel* model;
 
     void _load();
 };

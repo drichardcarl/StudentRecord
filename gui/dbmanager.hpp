@@ -21,6 +21,11 @@ public:
                    const QString& mname,
                    const QString& idNo,
                    const QString& course);
+    bool updateStudent(const QString& lname,
+                   const QString& fname,
+                   const QString& mname,
+                   const QString& idNo,
+                   const QString& course);
     bool idNoIsTaken(const QString& idNo);
 
 private:
