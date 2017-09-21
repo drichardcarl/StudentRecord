@@ -49,6 +49,4 @@ CONFIG += c++14
 DISTFILES += \
     README.md
 
-RESOURCES += \
-    res.qrc
-
+RC_ICONS = ico.ico
