@@ -46,3 +46,6 @@ FORMS += \
 
 CONFIG += c++14
 
+DISTFILES += \
+    README.md
+
