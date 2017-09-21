@@ -86,13 +86,13 @@ void SR::on_DeleteBtn_clicked()
     if (ui->SRDisplay->selectedItems().isEmpty()){
         alert(1,
               "Empty selection",
-              "Please select a record to edit.");
+              "Please select a record to delete.");
         return;
     }
 
     if (alert(3,
           "Confirm Action",
-          "Are you sure you want to delete selected record ?")
+          "Are you sure you want to delete the selected record?")
             == QMessageBox::Yes){
         // delete student with the ID No.
         dbmngr->deleteStudent(ui->SRDisplay->selectedItems().at(3)->text());
