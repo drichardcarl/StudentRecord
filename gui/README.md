@@ -1,5 +1,7 @@
 # StudentRecord - gui
 [*] Graphical User Interface for Commandline version of StudentRecord
+    * made and compiled using the Qt Framework
+
 [*] USAGE INSTRUCTIONS
      * ADDING : lick the (+) button on the upper left and then enter the
                 necessary information required
