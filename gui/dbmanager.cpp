@@ -1,5 +1,7 @@
 #include "dbmanager.hpp"
 
+// * alerts the user when the database is not found on the current directory
+// * opens the database if it is present in the current directory
 int DbManager::open(const QString& path){
     m_db = QSqlDatabase::addDatabase("QSQLITE");
     m_db.setDatabaseName(path);

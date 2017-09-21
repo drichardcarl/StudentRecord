@@ -20,6 +20,9 @@ void UIEditStudent::on_ESUCancelBtn_clicked()
     this->reject();
 }
 
+// * same verification meaures are employed as with the ADDING of a student
+//   but this time, there is no more verification for the ID No. since it can't
+//   be edited
 void UIEditStudent::on_ESUSaveBtn_clicked()
 {
     QString lname = ui->txtLName->text().toUpper(),
@@ -53,6 +56,7 @@ void UIEditStudent::on_ESUSaveBtn_clicked()
     this->accept();
 }
 
+// * populates the fields with values from the data of the selected row
 void UIEditStudent::init(QList<QTableWidgetItem*> data)
 {
     ui->txtLName->setText(data.at(0)->text());

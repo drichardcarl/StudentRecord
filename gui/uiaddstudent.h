@@ -5,6 +5,7 @@
 #include "dbmanager.hpp"
 #include "alert.hpp"
 
+// just a GUI to help the user add a student into the database
 namespace Ui {
 class UIAddStudent;
 }
@@ -18,8 +19,9 @@ public:
     ~UIAddStudent();
 
 private slots:
+    // when user clicks CANCEL button
     void on_ASUCancelBtn_clicked();
-
+    // when user clicks ADD button
     void on_ASUAddBtn_clicked();
 
 private:

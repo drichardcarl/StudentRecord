@@ -105,6 +105,10 @@ void SR::on_DeleteBtn_clicked()
     ui->SRDisplay->clearSelection();
 }
 
+// * establishes the lower and upper bounds for searching
+// * e.g. if SEARCH BAR contains "2014-" then
+//   the lower bound for searching ID No. is "2014-0000"
+//   and the upper bound is "2014-9999"
 void SR::on_SearchBar_textChanged(const QString &arg1)
 {
     // if search bar contains only '-' load the data

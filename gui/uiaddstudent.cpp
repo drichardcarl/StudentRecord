@@ -20,6 +20,8 @@ void UIAddStudent::on_ASUCancelBtn_clicked()
     this->reject();
 }
 
+// * the user can't add if all the fields are empty except for <MIDDLE NAME>
+// * performs a verification if the sepcidied ID No. is already taken or not
 void UIAddStudent::on_ASUAddBtn_clicked()
 {
     QString lname = ui->txtLName->text().toUpper(),
