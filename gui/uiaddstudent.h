@@ -19,9 +19,9 @@ public:
     ~UIAddStudent();
 
 private slots:
-    // when user clicks CANCEL button
+    // when user clicks CANCEL ( X ) button
     void on_ASUCancelBtn_clicked();
-    // when user clicks ADD button
+    // when user clicks ADD ( + ) button
     void on_ASUAddBtn_clicked();
 
 private:

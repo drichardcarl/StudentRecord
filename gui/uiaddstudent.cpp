@@ -3,8 +3,8 @@
 
 UIAddStudent::UIAddStudent(DbManager* dbmngr,QDialog *parent) :
     QDialog(parent),
-    dbmngr(dbmngr),
-    ui(new Ui::UIAddStudent)
+    ui(new Ui::UIAddStudent),
+    dbmngr(dbmngr)
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::SubWindow);
