@@ -44,7 +44,7 @@ bool DbManager::addStudent(const QString& lname,
    }
    else
    {
-        qDebug() << "addPerson error:  "
+        qDebug() << "addStudent error:  "
                  << query.lastError();
    }
 
@@ -95,7 +95,7 @@ bool DbManager::deleteStudent(const QString& idNo)
    }
    else
    {
-        qDebug() << "updatePerson error:  "
+        qDebug() << "deleteStudent error:  "
                  << query.lastError();
    }
 

@@ -4,8 +4,7 @@
 SR::SR(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SR),
-    dbmngr(nullptr),
-    model(nullptr)
+    dbmngr(nullptr)
 {
     ui->setupUi(this);
     startTimer(500);
@@ -106,16 +105,32 @@ void SR::on_DeleteBtn_clicked()
     ui->SRDisplay->clearSelection();
 }
 
-void SR::on_SearchBar_returnPressed()
+void SR::on_SearchBar_textChanged(const QString &arg1)
 {
+    // if search bar contains only '-' load the data
+    if (ui->SearchBar->text().size() == 1){
+        _load();
+        return;
+    }
+    // prepares the lower and upper bound for searching
     QString idNo = ui->SearchBar->text();
+    QString firstIDNo = "0000-0000";
+    QString lastIDNo = "9999-9999";
+    for (int i=0; i<idNo.size(); ++i){
+        if (idNo[i] != '-'){
+            firstIDNo[i] = idNo[i];
+            lastIDNo[i] = idNo[i];
+        }
+    }
+    // it's time for search and display!!
     QSqlQuery q;
     q.prepare("SELECT * "
               "FROM students "
-              "WHERE idNo=?");
-    q.addBindValue(idNo);
+              "WHERE idNo >= ? AND idNo <= ?");
+    q.addBindValue(firstIDNo);
+    q.addBindValue(lastIDNo);
     q.exec();
-
+    // update the display
     int i = 0;
     ui->SRDisplay->setRowCount(i);
     while(q.next()){
@@ -128,11 +143,4 @@ void SR::on_SearchBar_returnPressed()
         }
         ++i;
     }
-}
-
-
-void SR::on_SearchBar_textChanged(const QString &arg1)
-{
-    if (ui->SearchBar->text().size() == 1)
-        _load();
 }

@@ -2,11 +2,12 @@
 #define SR_H
 
 #include <QWidget>
-#include <QSqlTableModel>
 #include "uieditstudent.h"
 #include "uiaddstudent.h"
 #include "dbmanager.hpp"
 
+// SR = StudentRecord
+// * just a GUI to help the user visualize the database
 namespace Ui {
 class SR;
 }
@@ -21,20 +22,18 @@ public:
     ~SR();
 
 private slots:
+    // when user clicks the ADD button
     void on_AddBtn_clicked();
-
+    // when user clicks the EDIT button
     void on_EditBtn_clicked();
-
+    // when user clicks the DELETE button
     void on_DeleteBtn_clicked();
-
-    void on_SearchBar_returnPressed();
-
+    // when text on the SEARCH BAR has changed
     void on_SearchBar_textChanged(const QString &arg1);
 
 private:
     Ui::SR *ui;
     DbManager* dbmngr;
-    QSqlTableModel* model;
 
     void _load();
 };
