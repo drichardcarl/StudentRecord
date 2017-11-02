@@ -57,6 +57,14 @@ void UIAddEditStudent::on_ASUAddBtn_clicked()
               "<COURSE> cannot be empty!");
         return;
     }
+
+    if (course == "[edit]"){
+        alert(1,
+              "Empty Course!",
+              "Please add some courses");
+        return;
+    }
+
     if (!isOnEditMode){
         if (this->dbmngr->idNoIsTaken(idNo)){
             alert(1,

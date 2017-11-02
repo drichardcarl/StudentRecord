@@ -45,6 +45,8 @@ void SR::_load(){
         }
         ++i;
     }
+    if (i == 0) // table is empty
+        ui->SRDisplay->setRowCount(i);
 }
 
 void SR::on_AddBtn_clicked()
@@ -70,6 +72,7 @@ void SR::on_EditBtn_clicked()
     }
     int r = ui->SRDisplay->selectedItems().at(0)->row();
     UIAddEditStudent win(dbmngr);
+    win.setWindowTitle("Edit Student");
     win.editMode(ui->SRDisplay->selectedItems());
     if (win.exec()){ // cancel button was not pressed
         _load();
