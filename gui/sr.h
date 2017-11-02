@@ -2,8 +2,7 @@
 #define SR_H
 
 #include <QWidget>
-#include "uieditstudent.h"
-#include "uiaddstudent.h"
+#include "uiaddeditstudent.h"
 #include "dbmanager.hpp"
 
 // SR = StudentRecord

@@ -49,7 +49,7 @@ void SR::_load(){
 
 void SR::on_AddBtn_clicked()
 {
-    UIAddStudent win(dbmngr);
+    UIAddEditStudent win(dbmngr);
     if (win.exec()){ // cancel button was not pressed
         _load();
         ui->SRDisplay->selectRow(ui->SRDisplay->rowCount()-1); // select last row
@@ -69,7 +69,7 @@ void SR::on_EditBtn_clicked()
         return;
     }
     int r = ui->SRDisplay->selectedItems().at(0)->row();
-    UIAddStudent win(dbmngr);
+    UIAddEditStudent win(dbmngr);
     win.editMode(ui->SRDisplay->selectedItems());
     if (win.exec()){ // cancel button was not pressed
         _load();

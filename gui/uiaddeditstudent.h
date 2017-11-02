@@ -10,17 +10,17 @@
 
 // just a GUI to help the user add a student into the database
 namespace Ui {
-class UIAddStudent;
+class UIAddEditStudent;
 }
 
-class UIAddStudent : public QDialog
+class UIAddEditStudent : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit UIAddStudent(DbManager* dbmngr, QDialog *parent = 0);
+    explicit UIAddEditStudent(DbManager* dbmngr, QDialog *parent = 0);
     void editMode(QList<QTableWidgetItem*> data);
-    ~UIAddStudent();
+    ~UIAddEditStudent();
 
 private slots:
     // when user clicks CANCEL ( X ) button
@@ -32,7 +32,7 @@ private slots:
     void loadCourses();
 
 private:
-    Ui::UIAddStudent *ui;
+    Ui::UIAddEditStudent *ui;
     DbManager* dbmngr;
     bool isOnEditMode = false;
 };

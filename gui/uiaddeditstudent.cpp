@@ -1,9 +1,9 @@
-#include "uiaddstudent.h"
+#include "uiaddeditstudent.h"
 #include "ui_uiaddstudent.h"
 
-UIAddStudent::UIAddStudent(DbManager* dbmngr,QDialog *parent) :
+UIAddEditStudent::UIAddEditStudent(DbManager* dbmngr,QDialog *parent) :
     QDialog(parent),
-    ui(new Ui::UIAddStudent),
+    ui(new Ui::UIAddEditStudent),
     dbmngr(dbmngr)
 {
     ui->setupUi(this);
@@ -11,19 +11,19 @@ UIAddStudent::UIAddStudent(DbManager* dbmngr,QDialog *parent) :
     loadCourses();
 }
 
-UIAddStudent::~UIAddStudent()
+UIAddEditStudent::~UIAddEditStudent()
 {
     delete ui;
 }
 
-void UIAddStudent::on_ASUCancelBtn_clicked()
+void UIAddEditStudent::on_ASUCancelBtn_clicked()
 {
     this->reject();
 }
 
 // * the user can't add if all the fields are empty except for <MIDDLE NAME>
 // * performs a verification if the sepcidied ID No. is already taken or not
-void UIAddStudent::on_ASUAddBtn_clicked()
+void UIAddEditStudent::on_ASUAddBtn_clicked()
 {
     QString lname = ui->txtLName->text(),
             fname = ui->txtFName->text(),
@@ -83,7 +83,7 @@ void UIAddStudent::on_ASUAddBtn_clicked()
     this->accept();
 }
 
-void UIAddStudent::on_cbxCourse_currentTextChanged(const QString &arg1)
+void UIAddEditStudent::on_cbxCourse_currentTextChanged(const QString &arg1)
 {
     if (arg1 == "[edit]"){
         UIEditCourses win(dbmngr);
@@ -92,13 +92,13 @@ void UIAddStudent::on_cbxCourse_currentTextChanged(const QString &arg1)
     }
 }
 
-void UIAddStudent::loadCourses(){
+void UIAddEditStudent::loadCourses(){
     ui->cbxCourse->clear();
     ui->cbxCourse->addItems(dbmngr->getAllCourses());
     ui->cbxCourse->addItem("[edit]");
 }
 
-void UIAddStudent::editMode(QList<QTableWidgetItem*> data){
+void UIAddEditStudent::editMode(QList<QTableWidgetItem*> data){
     isOnEditMode = true;
     ui->txtIDNo->setEnabled(false);
     ui->ASUAddBtn->setText("$");

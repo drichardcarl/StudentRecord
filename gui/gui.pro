@@ -29,19 +29,19 @@ SOURCES += \
     dbmanager.cpp \
     alert.cpp \
     uieditcourses.cpp \
-    uiaddstudent.cpp
+    uiaddeditstudent.cpp
 
 HEADERS += \
         sr.h \
     dbmanager.hpp \
     alert.hpp \
     uieditcourses.h \
-    uiaddstudent.h
+    uiaddeditstudent.h
 
 FORMS += \
         sr.ui \
     uieditcourses.ui \
-    uiaddstudent.ui
+    uiaddeditstudent.ui
 
 
 CONFIG += c++14
