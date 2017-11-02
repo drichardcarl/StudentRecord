@@ -1,5 +1,5 @@
 #include "uiaddeditstudent.h"
-#include "ui_uiaddstudent.h"
+#include "ui_uiaddeditstudent.h"
 
 UIAddEditStudent::UIAddEditStudent(DbManager* dbmngr,QDialog *parent) :
     QDialog(parent),

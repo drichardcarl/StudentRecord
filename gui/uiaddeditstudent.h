@@ -1,5 +1,5 @@
-#ifndef UIADDSTUDENT_H
-#define UIADDSTUDENT_H
+#ifndef UIADDEDITSTUDENT_H
+#define UIADDEDITSTUDENT_H
 
 #include <QDialog>
 #include <QList>
@@ -37,4 +37,4 @@ private:
     bool isOnEditMode = false;
 };
 
-#endif // UIADDSTUDENT_H
+#endif // UIADDEDITSTUDENT_H
