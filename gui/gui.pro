@@ -47,6 +47,7 @@ FORMS += \
 CONFIG += c++14
 
 DISTFILES += \
-    README.md
+    README.md \
+    StudentRecord.sql
 
 RC_ICONS = ico.ico
