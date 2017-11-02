@@ -37,7 +37,7 @@ void SR::_load(){
     int i = 0;
     while(query.next()){
         ui->SRDisplay->setRowCount(i+1);
-        for (int j=1; j<6; ++j){
+        for (int j=1; j<7; ++j){
             QTableWidgetItem* item = new QTableWidgetItem;
             item->setTextAlignment(Qt::AlignCenter);
             item->setText(query.value(j).toString());
@@ -69,15 +69,15 @@ void SR::on_EditBtn_clicked()
         return;
     }
     int r = ui->SRDisplay->selectedItems().at(0)->row();
-    UIEditStudent win(dbmngr);
-    win.init(ui->SRDisplay->selectedItems());
+    UIAddStudent win(dbmngr);
+    win.editMode(ui->SRDisplay->selectedItems());
     if (win.exec()){ // cancel button was not pressed
         _load();
         ui->SRDisplay->selectRow(r); // select last selected row
         ui->SRDisplay->setFocus();
         return;
     }
-    // if cancel, clear selection
+    // if cancel, clear selection//*
     ui->SRDisplay->clearSelection();
 }
 
@@ -111,35 +111,35 @@ void SR::on_DeleteBtn_clicked()
 //   and the upper bound is "2014-9999"
 void SR::on_SearchBar_textChanged(const QString &arg1)
 {
-    // if search bar contains only '-' load the data
-    if (ui->SearchBar->text().size() == 1){
+    // if search bar is empty load the data
+    if (ui->SearchBar->text().isEmpty()){
         _load();
         return;
     }
-    // prepares the lower and upper bound for searching
-    QString idNo = ui->SearchBar->text();
-    QString firstIDNo = "0000-0000";
-    QString lastIDNo = "9999-9999";
-    for (int i=0; i<idNo.size(); ++i){
-        if (idNo[i] != '-'){
-            firstIDNo[i] = idNo[i];
-            lastIDNo[i] = idNo[i];
-        }
-    }
     // it's time for search and display!!
+    // search columns with values containing the string to search for
+    // e.g if user want to search for students having 'carl' as first name
+    //     the query would be SELECT * FROM students WHERE firstName LIKE "%carl%".
+    //     Note that the search is CASE-INSENSITIVE.
+    QString searchInput = ui->SearchBar->text();
+    searchInput = "%" + searchInput + "%";
     QSqlQuery q;
     q.prepare("SELECT * "
               "FROM students "
-              "WHERE idNo >= ? AND idNo <= ?");
-    q.addBindValue(firstIDNo);
-    q.addBindValue(lastIDNo);
+              "WHERE lastName LIKE ? OR firstName LIKE ? OR middleName LIKE ? OR idNo LIKE ? OR course LIKE ? OR gender LIKE ?");
+    q.addBindValue(searchInput);
+    q.addBindValue(searchInput);
+    q.addBindValue(searchInput);
+    q.addBindValue(searchInput);
+    q.addBindValue(searchInput);
+    q.addBindValue(searchInput);
     q.exec();
     // update the display
     int i = 0;
     ui->SRDisplay->setRowCount(i);
     while(q.next()){
         ui->SRDisplay->setRowCount(i+1);
-        for (int j=1; j<6; ++j){
+        for (int j=1; j<7; ++j){
             QTableWidgetItem* item = new QTableWidgetItem;
             item->setTextAlignment(Qt::AlignCenter);
             item->setText(q.value(j).toString());
@@ -147,4 +147,5 @@ void SR::on_SearchBar_textChanged(const QString &arg1)
         }
         ++i;
     }
+
 }

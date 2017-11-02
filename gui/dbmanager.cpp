@@ -27,18 +27,20 @@ bool DbManager::addStudent(const QString& lname,
                           const QString& fname,
                           const QString& mname,
                           const QString& idNo,
-                          const QString& course)
+                          const QString& course,
+                          const QString& gender)
 {
    bool success = false;
    QSqlQuery query;
    query.prepare("INSERT INTO "
-                 "students (lastName, firstName, middleName, idNo, course) "
-                 "VALUES (?, ?, ?, ?, ?)");
+                 "students (lastName, firstName, middleName, idNo, course, gender) "
+                 "VALUES (?, ?, ?, ?, ?, ?)");
    query.addBindValue(lname);
    query.addBindValue(fname);
    query.addBindValue(mname);
    query.addBindValue(idNo);
    query.addBindValue(course);
+   query.addBindValue(gender);
 
    if(query.exec())
    {
@@ -57,17 +59,19 @@ bool DbManager::updateStudent(const QString& lname,
                           const QString& fname,
                           const QString& mname,
                           const QString& idNo,
-                          const QString& course)
+                          const QString& course,
+                          const QString& gender)
 {
    bool success = false;
    QSqlQuery query;
    query.prepare("UPDATE students "
-                 "SET lastName=?, firstName=?, middleName=?, course=?"
+                 "SET lastName=?, firstName=?, middleName=?, course=?, gender=?"
                  "WHERE idNo=?");
    query.addBindValue(lname);
    query.addBindValue(fname);
    query.addBindValue(mname);
    query.addBindValue(course);
+   query.addBindValue(gender);
    query.addBindValue(idNo);
 
    if(query.exec())
@@ -115,4 +119,54 @@ bool DbManager::idNoIsTaken(const QString& idNo){
         ++count;
 
     return ((count) ? true : false);
+}
+
+QStringList DbManager::getAllCourses(){
+    QStringList sl;
+    QSqlQuery q;
+    q.prepare("SELECT courseName FROM courses");
+    q.exec();
+    while(q.next())
+        sl.append(q.value(0).toString());
+
+    return sl;
+}
+void DbManager::addCourse(const QString& course){
+    bool success = false;
+    QSqlQuery query;
+    query.prepare("INSERT INTO "
+                  "courses (courseName) "
+                  "VALUES (?)");
+    query.addBindValue(course);
+
+    if(query.exec())
+    {
+        success = true;
+    }
+    else
+    {
+         qDebug() << "addStudent error:  "
+                  << query.lastError();
+    }
+}
+
+bool DbManager::deleteCourse(const QString& course)
+{
+   bool success = false;
+   QSqlQuery query;
+   query.prepare("DELETE FROM courses "
+                 "WHERE courseName=?");
+   query.addBindValue(course);
+
+   if(query.exec())
+   {
+       success = true;
+   }
+   else
+   {
+        qDebug() << "deleteStudent error:  "
+                 << query.lastError();
+   }
+
+   return success;
 }

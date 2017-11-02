@@ -8,6 +8,7 @@ UIAddStudent::UIAddStudent(DbManager* dbmngr,QDialog *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags(Qt::SubWindow);
+    loadCourses();
 }
 
 UIAddStudent::~UIAddStudent()
@@ -24,11 +25,12 @@ void UIAddStudent::on_ASUCancelBtn_clicked()
 // * performs a verification if the sepcidied ID No. is already taken or not
 void UIAddStudent::on_ASUAddBtn_clicked()
 {
-    QString lname = ui->txtLName->text().toUpper(),
-            fname = ui->txtFName->text().toUpper(),
-            mname = ui->txtMName->text().toUpper(),
-            idNo = ui->txtIDNo->text().toUpper(),
-            course = ui->txtCourse->text().toUpper();
+    QString lname = ui->txtLName->text(),
+            fname = ui->txtFName->text(),
+            mname = ui->txtMName->text(),
+            idNo = ui->txtIDNo->text(),
+            course = ui->cbxCourse->currentText(),
+            gender = (ui->rbMale->isChecked()) ? ui->rbMale->text() : ui->rbFemale->text();
 
     // check for empty fields
     if (lname.isEmpty()){
@@ -55,14 +57,60 @@ void UIAddStudent::on_ASUAddBtn_clicked()
               "<COURSE> cannot be empty!");
         return;
     }
-    if (this->dbmngr->idNoIsTaken(idNo)){
-        alert(1,
-              "Invalid Input",
-              "ID No. must be unique!\nYou may edit the existing record.");
-        return;
+    if (!isOnEditMode){
+        if (this->dbmngr->idNoIsTaken(idNo)){
+            alert(1,
+                  "Invalid Input",
+                  "ID No. must be unique!\nYou may edit the existing record.");
+            return;
+        }
     }
 
-    this->dbmngr->addStudent(lname, fname, mname, idNo, course);
-    alert(0, "Status", "Student Added.");
+    if (!(ui->rbMale->isChecked() || ui->rbFemale->isChecked())){
+        alert(1,
+              "Invalid Input",
+              "Please select a gender.");
+        return;
+    }
+    if (!isOnEditMode){
+        this->dbmngr->addStudent(lname, fname, mname, idNo, course, gender);
+        alert(0, "Status", "Student Added.");
+    }
+    else {
+        this->dbmngr->updateStudent(lname, fname, mname, idNo, course, gender);
+        alert(0, "Status", "Student's record was successfully updated.");
+    }
     this->accept();
+}
+
+void UIAddStudent::on_cbxCourse_currentTextChanged(const QString &arg1)
+{
+    if (arg1 == "[edit]"){
+        UIEditCourses win(dbmngr);
+        win.exec();
+        loadCourses();
+    }
+}
+
+void UIAddStudent::loadCourses(){
+    ui->cbxCourse->clear();
+    ui->cbxCourse->addItems(dbmngr->getAllCourses());
+    ui->cbxCourse->addItem("[edit]");
+}
+
+void UIAddStudent::editMode(QList<QTableWidgetItem*> data){
+    isOnEditMode = true;
+    ui->txtIDNo->setEnabled(false);
+    ui->ASUAddBtn->setText("$");
+
+    ui->txtLName->setText(data.at(0)->text());
+    ui->txtFName->setText(data.at(1)->text());
+    ui->txtMName->setText(data.at(2)->text());
+    ui->txtIDNo->setText(data.at(3)->text());
+    ui->cbxCourse->setCurrentText(data.at(4)->text());
+
+    if (data.at(5)->text() == "Male")
+        ui->rbMale->setChecked(true);
+    else
+        ui->rbFemale->setChecked(true);
 }

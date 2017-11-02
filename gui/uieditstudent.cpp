@@ -29,7 +29,9 @@ void UIEditStudent::on_ESUSaveBtn_clicked()
             fname = ui->txtFName->text().toUpper(),
             mname = ui->txtMName->text().toUpper(),
             idNo = ui->txtIDNo->text().toUpper(),
-            course = ui->txtCourse->text().toUpper();
+            course = ui->cbxCourse->currentText(),
+            gender = (ui->rbMale->isChecked()) ? ui->rbMale->text() : ui->rbFemale->text();
+
 
     // check for empty fields
     if (lname.isEmpty()){
@@ -51,7 +53,7 @@ void UIEditStudent::on_ESUSaveBtn_clicked()
         return;
     }
 
-    this->dbmngr->updateStudent(lname, fname, mname, idNo, course);
+    this->dbmngr->updateStudent(lname, fname, mname, idNo, course, gender);
     alert(0, "Status", "Student's record was successfully updated.");
     this->accept();
 }

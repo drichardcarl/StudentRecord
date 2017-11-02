@@ -24,17 +24,22 @@ public:
                    const QString& fname,
                    const QString& mname,
                    const QString& idNo,
-                   const QString& course);
+                   const QString& course,
+                   const QString& gender);
     // updates an existing record of a student in the database
     bool updateStudent(const QString& lname,
                    const QString& fname,
                    const QString& mname,
                    const QString& idNo,
-                   const QString& course);
+                       const QString& course,
+                       const QString& gender);
     // removes an existing record of a student from the database
     bool deleteStudent(const QString& idNo);
     // checks if a student has been recorded with the same ID No.
     bool idNoIsTaken(const QString& idNo);
+    QStringList getAllCourses();
+    void addCourse(const QString& course);
+    bool deleteCourse(const QString& course);
 
 private:
     QSqlDatabase m_db;

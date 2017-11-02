@@ -28,20 +28,20 @@ SOURCES += \
         sr.cpp \
     dbmanager.cpp \
     alert.cpp \
-    uiaddstudent.cpp \
-    uieditstudent.cpp
+    uieditcourses.cpp \
+    uiaddstudent.cpp
 
 HEADERS += \
         sr.h \
     dbmanager.hpp \
     alert.hpp \
-    uiaddstudent.h \
-    uieditstudent.h
+    uieditcourses.h \
+    uiaddstudent.h
 
 FORMS += \
         sr.ui \
-    uiaddstudent.ui \
-    uieditstudent.ui
+    uieditcourses.ui \
+    uiaddstudent.ui
 
 
 CONFIG += c++14

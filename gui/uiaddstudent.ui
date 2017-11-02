@@ -256,10 +256,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="txtCourse">
+       <widget class="QComboBox" name="cbxCourse">
         <property name="minimumSize">
          <size>
-          <width>0</width>
+          <width>133</width>
           <height>30</height>
          </size>
         </property>
@@ -268,15 +268,6 @@
           <width>200</width>
           <height>16777215</height>
          </size>
-        </property>
-        <property name="inputMask">
-         <string/>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="placeholderText">
-         <string>&lt;COURSE&gt;</string>
         </property>
        </widget>
       </item>
@@ -292,6 +283,35 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblIDNo_2">
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;GENDER :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::RichText</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="rbMale">
+        <property name="text">
+         <string>Male</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="rbFemale">
+        <property name="text">
+         <string>Female</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -336,6 +356,19 @@ QPushButton#ASUAddBtn:pressed {
       </item>
       <item>
        <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_4">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
